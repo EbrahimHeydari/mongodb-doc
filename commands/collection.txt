@@ -1,0 +1,5 @@
+show collections                                          // نمایش تمام مجموعه های پایگاه داده فعلی
+
+db.createCollection('[collection]')                       // ساخت مجموعه در پایگاه داده فعلی
+
+db.[collection].countDocuments()                          // شمارش داکیومنت های مجموعه

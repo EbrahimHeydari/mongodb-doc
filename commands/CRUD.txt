@@ -1,0 +1,95 @@
+db.[collection].find()                                      // پیدا کردن تمام داکیومنت های مجموعه
+
+db.[collection].findOne()                                   // پیدا کردن داکیومنتی
+
+db.[collection].find().limit(3)                             // پیدا کردن مقدار مشخصی از داکیومنت های مجموعه
+
+db.[collection].find({ title: "Post Two" })                 // پیدا کردن داکیومنت هایی با ویژگی خاص
+
+db.[collection].findOne({ title: "Post Two" })              // پیدا کردن داکیومنتی با ویژگی خاص
+
+db.[collection].find().sort({ title: 1 })                   // مرتب کردن داکیومنت های مجموعه به صورت صعودی
+
+db.[collection].find().sort({ title: -1 })                  // مرتب کردن داکیومنت های مجموعه به صورت نزولی
+
+db.[collection].find({ title: "Post Two" }).count()         // شماره داکیومنت های مجموعه با ویژگی خاص
+
+db.[collection].insertOne({                                 // ایجاد داکیومنت در مجموعه
+  title: 'Post One',
+  category: 'news',
+  like: 4,
+  tags: ['news', 'events'],
+  user: {
+    name: 'John Doe',
+    status: 'author'
+  },
+  date: Date()
+})
+
+db.[collection].insertMany([                                // ایجاد چند داکیومنت در مجموعه
+  {
+    title: 'Post One',
+    category: 'news',
+    like: 4,
+    date: Date(),
+  },
+  {
+    title: 'Post Two',
+    category: 'news',
+    like: 4,
+    date: Date(),
+  }
+])
+
+db.[collection].updateOne(                                  // بروزرسانی داکیومنت به صورت جایگزینی کامل
+  { title: 'Post Two' },
+  {
+    $set: {
+      title: 'Post Two',
+      category: 'news',
+      avail: true,
+      date: Date(),
+    },
+  },
+  { upsert: true }          // باعث جایگزینی کامل داکیومنت با داکیومنت قبلی می شود
+)
+
+db.[collection].updateMany(                                 // بروزرسانی داکیومنت های با ویژگی مشخص
+  { title: 'Post Two' },
+  {
+    $set: {
+      avail: true,
+    },
+  }
+)
+
+db.[collection].updateOne(                                  // بروزرسانی قسمتی از یک داکیومنت
+  { title: 'Post Two' },
+  {
+    $set: {
+      avail: true,
+    },
+  }
+)
+
+db.[collection].updateOne(                                  // افزایش مقدار ویژگی مشخصی از داکیومنت
+  { title: 'Post One' },
+  {
+    $inc: {
+      like: 2,
+    },
+  }
+)
+
+db.[collection].updateOne(                                  // تغییر نام ویژگی مشخصی از داکیومنت
+  { title: 'Post One' },
+  {
+    $rename: {
+      like: 'views',
+    },
+  }
+)
+
+db.[collection].deleteMany({title: 'Post One' })            // حذف داکیومنت های با ویژگی مشخص
+
+db.[collection].deleteOne({title: 'Post One' })             // حذف داکیومنتی با ویژگی مشخص
